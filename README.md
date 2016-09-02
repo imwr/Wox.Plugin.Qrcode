@@ -1,5 +1,5 @@
 # Wox.Plugin.Qrcode
-A qrcode generator plugin of [wox][1]
+A qrcode generator plugin for [wox][1]
 
 ## Features
 * Support preview and save qrcode image
@@ -13,8 +13,8 @@ A qrcode generator plugin of [wox][1]
 ## Syntax
 `qr content [-s size] [-p path] [-f filename] [size] [path] [filename]`
 
-**【size】** qrcode'size, default 100px. Plugin will change size automatically to fit content'length.
-**【path】** qrcode'path, default Users Desktop. If path is not absolute, qrcode will also be saved in Users Desktop.
+**【size】** qrcode'size, default 100px. Plugin will change size automatically to fit content'length.  
+**【path】** qrcode'path, default Users Desktop. If path is not absolute, qrcode will also be saved in Users Desktop.  
 **【filename】** qrcode'filename, default `qrcode.png`
 
 If a parameter contains any spaces, you should use quote, like this: 
