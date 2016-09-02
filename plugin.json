@@ -1,0 +1,12 @@
+{
+    "ID":"c662afd496e248e1aba2d22ff5cbc71a",
+    "ActionKeyword":"qr",
+    "Name":"Qrcode",
+    "Description":"a qrcode generator",
+    "Author":"imwr",
+    "Version":"1.0.0",
+    "Language":"python",
+    "Website":"http://github.com/imwr/wox-qrcode",
+    "ExecuteFileName":"main.py",
+    "IcoPath":"Images\\icon.png"
+}
