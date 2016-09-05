@@ -32,23 +32,10 @@ class QrcodeGenerator(Wox):
 
         size, filepath, filename, has_options = 400, None, None, False
         for k, v in zip(paramters, paramters[1:] + ["-"]):
-            if k == "-r" and not v.startswith('-'):
-                if not os.path.exists(v):
-                    result.append({
-                        "Title": "Image not exist",
-                        "IcoPath": "Images/icon.png"
-                    })
-                    return result
-                else:
-                    result.append({
-                        "Title": qrcode.decode()
-                    })
-                    return result
-
             if k == "-s" and not v.startswith('-'):
                 try:
                     size = int(v)
-                except:
+                except ValueError:
                     result.append({
                         "Title": "Generate content: " + paramters[0],
                         "SubTitle": "Size error",
@@ -62,17 +49,16 @@ class QrcodeGenerator(Wox):
             elif k == "-f" and not v.startswith('-'):
                 filename = v
                 has_options = True
-        if not has_options:
-            if len(paramters) > 1:
-                try:
-                    size = int(paramters[1])
-                except:
-                    result.append({
-                        "Title": "Generate content: " + paramters[0],
-                        "SubTitle": "Size error",
-                        "IcoPath": "Images/icon.png"
-                    })
-                    return result
+        if not has_options and len(paramters) > 1 and paramters[1] != "\\":
+            try:
+                size = int(paramters[1])
+            except ValueError:
+                result.append({
+                    "Title": "Generate content: " + paramters[0],
+                    "SubTitle": "Size error",
+                    "IcoPath": "Images/icon.png"
+                })
+                return result
             if len(paramters) > 2:
                 filepath = paramters[2]
             if len(paramters) > 3:
