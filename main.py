@@ -96,23 +96,26 @@ class QrcodeGenerator(Wox):
         return name
 
     def generte_qrcode(self, *arg):
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=((arg[1] / 20 - arg[1] / 100) if len(arg) > 1 else 8),
-            border=2,
-        )
-        qr.add_data(arg[0])
-        qr.make(fit=True)
-        img = qr.make_image()
+        try:
+            qr = qrcode.QRCode(
+                version=1,
+                error_correction=qrcode.constants.ERROR_CORRECT_L,
+                box_size=((arg[1] / 20 - arg[1] / 100) if len(arg) > 1 else 8),
+                border=2,
+            )
+            qr.add_data(arg[0])
+            qr.make(fit=True)
+            img = qr.make_image()
 
-        if len(arg) == 1:
-            img.show()
-        elif len(arg) == 4:
-            path = arg[2]
-            if not os.path.isfile(path) and not os.path.exists(path):
-                os.makedirs(path)
-            img.save(path + arg[3])
+            if len(arg) == 1:
+                img.show()
+            elif len(arg) == 4:
+                path = arg[2]
+                if not os.path.isfile(path) and not os.path.exists(path):
+                    os.makedirs(path)
+                img.save(path + arg[3])
+        except ValueError:
+            pass
 
 
 if __name__ == "__main__":
