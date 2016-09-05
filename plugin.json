@@ -6,7 +6,7 @@
     "Author":"imwr",
     "Version":"1.0.0",
     "Language":"python",
-    "Website":"http://github.com/imwr/wox-qrcode",
+    "Website":"http://github.com/imwr/Wox.Plugin.Qrcode",
     "ExecuteFileName":"main.py",
     "IcoPath":"Images\\icon.png"
 }
