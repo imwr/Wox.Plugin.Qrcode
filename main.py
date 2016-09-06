@@ -10,7 +10,7 @@ class QrcodeGenerator(Wox):
         if not query:
             result.append({
                 "Title": "Enter qrcode content",
-                "SubTitle": "content [-s size] [-p path] [-f filename] size [path] [filename]",
+                "SubTitle": "content [-s size] [-p path] [-f filename] [size [path] [[filename]]]",
                 "IcoPath": "Images/icon.png",
             })
             return result
@@ -19,8 +19,8 @@ class QrcodeGenerator(Wox):
 
         if len(paramters) == 1:  # only content
             result.append({
-                "Title": "Generate content: " + paramters[0],
-                "SubTitle": "Press key 'Enter' to preview qrcode",
+                "Title": "Content: " + paramters[0],
+                "SubTitle": "Press 'Enter' to preview qrcode",
                 "IcoPath": "Images/icon.png",
                 "JsonRPCAction": {
                     "method": "generte_qrcode",
@@ -37,7 +37,7 @@ class QrcodeGenerator(Wox):
                     size = int(v)
                 except ValueError:
                     result.append({
-                        "Title": "Generate content: " + paramters[0],
+                        "Title": "Content: " + paramters[0],
                         "SubTitle": "Size error",
                         "IcoPath": "Images/icon.png"
                     })
@@ -54,11 +54,19 @@ class QrcodeGenerator(Wox):
                 size = int(paramters[1])
             except ValueError:
                 result.append({
-                    "Title": "Generate content: " + paramters[0],
-                    "SubTitle": "Size error",
+                    "Title": "Content: " + paramters[0],
+                    "SubTitle": "Size invalid",
                     "IcoPath": "Images/icon.png"
                 })
                 return result
+            else:
+                if size < 20 or size > 1000:
+                    result.append({
+                        "Title": "Content: " + paramters[0],
+                        "SubTitle": "Size too small or big",
+                        "IcoPath": "Images/icon.png"
+                    })
+                    return result
             if len(paramters) > 2:
                 filepath = paramters[2]
             if len(paramters) > 3:
@@ -67,8 +75,8 @@ class QrcodeGenerator(Wox):
         filepath = self.get_path(filepath)
         filename = self.get_file(filename)
         result.append({
-            "Title": "Generate content: " + paramters[0],
-            "SubTitle": "Press key 'Enter' to save image*{} in {}".format(size, filepath + filename),
+            "Title": "Content: " + paramters[0],
+            "SubTitle": "Press 'Enter' to save {}*image in {}".format(size, filepath + filename),
             "IcoPath": "Images/icon.png",
             "JsonRPCAction": {
                 "method": "generte_qrcode",
@@ -100,7 +108,7 @@ class QrcodeGenerator(Wox):
             qr = qrcode.QRCode(
                 version=1,
                 error_correction=qrcode.constants.ERROR_CORRECT_L,
-                box_size=((arg[1] / 20 - arg[1] / 100) if len(arg) > 1 else 8),
+                box_size=((arg[1] / 20 - arg[1] / 100) if len(arg) > 1 else 16),
                 border=2,
             )
             qr.add_data(arg[0])
