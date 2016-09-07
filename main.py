@@ -10,7 +10,7 @@ class QrcodeGenerator(Wox):
         if not query:
             result.append({
                 "Title": "Enter qrcode content",
-                "SubTitle": "content [-s size] [-p path] [-f filename] [size [path] [[filename]]]",
+                "SubTitle": "Content [-s size] [-p path] [-f filename] [size [path] [[filename]]]",
                 "IcoPath": "Images/icon.png",
             })
             return result
@@ -19,12 +19,22 @@ class QrcodeGenerator(Wox):
 
         if len(paramters) == 1:  # only content
             result.append({
-                "Title": "Content: " + paramters[0],
-                "SubTitle": "Press 'Enter' to preview qrcode",
-                "IcoPath": "Images/icon.png",
+                "Title": "Preview: " + paramters[0],
+                "SubTitle": "Preview qrcode",
+                "IcoPath": "Images/view_qr.png",
                 "JsonRPCAction": {
                     "method": "generte_qrcode",
                     "parameters": [paramters[0]],
+                    "dontHideAfterAction": False
+                }
+            })
+            result.append({
+                "Title": "Save: " + paramters[0],
+                "SubTitle": "Save qrcode in " + self.get_path("") + self.get_file(""),
+                "IcoPath": "Images/save_qr.png",
+                "JsonRPCAction": {
+                    "method": "generte_qrcode",
+                    "parameters": [paramters[0], 400, self.get_path(""), self.get_file("")],
                     "dontHideAfterAction": False
                 }
             })
@@ -75,12 +85,22 @@ class QrcodeGenerator(Wox):
         filepath = self.get_path(filepath)
         filename = self.get_file(filename)
         result.append({
-            "Title": "Content: " + paramters[0],
-            "SubTitle": "Press 'Enter' to save {}*image in {}".format(size, filepath + filename),
-            "IcoPath": "Images/icon.png",
+            "Title": "Save: " + paramters[0],
+            "SubTitle": "Save {}*image in {}".format(size, filepath + filename),
+            "IcoPath": "Images/save_qr.png",
             "JsonRPCAction": {
                 "method": "generte_qrcode",
                 "parameters": [paramters[0], size, filepath, filename],
+                "dontHideAfterAction": False
+            }
+        })
+        result.append({
+            "Title": "Preview: " + paramters[0],
+            "SubTitle": "Preview qrcode",
+            "IcoPath": "Images/view_qr.png",
+            "JsonRPCAction": {
+                "method": "generte_qrcode",
+                "parameters": [paramters[0]],
                 "dontHideAfterAction": False
             }
         })

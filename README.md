@@ -27,6 +27,6 @@ If a parameter contains any spaces, you should use quote, like this:
  - `qr "this is my content" -p "D:\Program Files\qrcode" ...`
 
 ## Screenshot
-![image](Images/screenshot.png)
+![image](screenshot.png)
 
 [1]: http://www.getwox.com/
